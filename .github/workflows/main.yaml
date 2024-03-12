@@ -3,21 +3,20 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
-    branches:
-      - master
 
 jobs:
-  build:
-    name: Build
+  deploy-development:
+    name: Deploy to development
+    environment: 'development'
     runs-on: ubuntu-latest
     steps:
-      - name: Echo Build on Master
-        run: echo 'Build on master'
+      - name: Deploy to production
+        run: echo 'Deploy to production'
 
 
-  deploy:
+  deploy-production:
     needs: build
+    environment: 'production'
     name: Deploy to production
     runs-on: ubuntu-latest
     steps:

@@ -1,24 +1,26 @@
-name: Branch Based Actions
-
+name: Deploy WebApp
 on:
   push:
     branches:
       - master
-      - production
+  workflow_dispatch:
+    branches:
+      - master
 
+env:
 jobs:
-  build-on-master:
-    name: Build on Master
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
     steps:
       - name: Echo Build on Master
         run: echo 'Build on master'
 
-  deploy-to-production:
-    name: Production Deployment
+
+  deploy:
+    needs: build
+    name: Deploy to production
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/production'
     steps:
-      - name: Echo Production Deployment
-        run: echo 'Production deployment'
+      - name: Deploy to production
+        run: echo 'Deploy to production'

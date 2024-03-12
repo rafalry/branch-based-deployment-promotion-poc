@@ -1,0 +1,38 @@
+name: Deploy WebApp
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: echo 'Build'
+
+  deploy-development:
+    needs: build
+    name: Deploy to development
+    environment: 'development'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        run: echo 'Deploy to production'
+
+  deploy-production-trigger:
+    needs: deploy-development
+    environment: 'production'
+    name: Trigger deploy to production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Merge master into production branch
+        run: |
+          git checkout production
+          git merge --no-ff --no-edit master
+      - name: Push changes to production branch
+        run: |
+          git push origin production

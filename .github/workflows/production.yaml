@@ -1,0 +1,13 @@
+name: Deploy WebApp
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy-production-trigger:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        run: echo 'Deploy to production'

@@ -1,0 +1,24 @@
+name: Branch Based Actions
+
+on:
+  push:
+    branches:
+      - master
+      - production
+
+jobs:
+  build-on-master:
+    name: Build on Master
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Echo Build on Master
+        run: echo 'Build on master'
+
+  deploy-to-production:
+    name: Production Deployment
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/production'
+    steps:
+      - name: Echo Production Deployment
+        run: echo 'Production deployment'

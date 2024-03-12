@@ -15,7 +15,7 @@ jobs:
 
 
   deploy-production:
-    needs: build
+    needs: deploy-development
     environment: 'production'
     name: Deploy to production
     runs-on: ubuntu-latest

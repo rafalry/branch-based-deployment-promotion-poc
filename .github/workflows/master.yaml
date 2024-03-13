@@ -23,13 +23,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.TOKEN }}
+          fetch-depth: 0
       - name: Merge master into production branch
         run: |
           set -x
-          git branch -D master-full || true
-          git fetch
-          git checkout -b master-full origin/master
-          git pull origin master
+          git status
           git --no-pager log --decorate=short --pretty=oneline -n30
           sleep 1
           git config --global user.name "rafalry"

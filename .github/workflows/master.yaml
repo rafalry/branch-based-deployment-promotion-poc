@@ -1,4 +1,4 @@
-name: Deploy WebApp
+name: Build and deploy to development
 on:
   push:
     branches:

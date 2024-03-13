@@ -26,19 +26,21 @@ jobs:
       - name: Merge master into production branch
         run: |
           set -x
-          git checkout master
-          git pull origin master
-          git --no-pager log --decorate=short --pretty=oneline -n100
-          sleep 3
+          git branch -D master-full || true
+          git fetch
+          git checkout -b master-full origin/master
+          git pull origin master-full
+          git --no-pager log --decorate=short --pretty=oneline -n30
+          sleep 1
           git config --global user.name "rafalry"
           git config --global user.email "rafalry@users.noreply.github.com"
           git branch -D production || true
           git fetch
           git checkout production || git checkout -b production
           git pull origin production
-          git --no-pager log --decorate=short --pretty=oneline -n100
-          sleep 3
-          git merge --ff-only --no-edit master
+          git --no-pager log --decorate=short --pretty=oneline -n30
+          sleep 1
+          git merge --ff-only --no-edit master-full
       - name: Push changes to production branch
         run: |
           git push origin production

@@ -26,11 +26,11 @@ jobs:
       - name: Merge master into production branch
         run: |
           git checkout master
-          git pull origin master
           git config --global user.name "rafalry"
           git config --global user.email "rafalry@users.noreply.github.com"
           git branch -d production || true
-          git checkout production origin/production || git checkout -b production origin/production
+          git fetch
+          git checkout production || git checkout -b production
           git pull origin production
           git merge --ff-only --no-edit master
       - name: Push changes to production branch

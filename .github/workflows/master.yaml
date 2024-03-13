@@ -28,6 +28,7 @@ jobs:
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "rafalry@users.noreply.github.com"
           git checkout production || git checkout -b production
+          git pull
           git merge --ff-only --no-edit master
       - name: Push changes to production branch
         run: |

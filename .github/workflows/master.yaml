@@ -33,7 +33,7 @@ jobs:
           token: ${{ secrets.TOKEN }}
       - name: Merge master into production branch
         run: |
-          git checkout -b production
+          git checkout production || git checkout -b production
           git merge --no-ff --no-edit master
       - name: Push changes to production branch
         run: |

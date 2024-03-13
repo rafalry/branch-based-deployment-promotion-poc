@@ -14,7 +14,7 @@ jobs:
         run: echo 'Deploy to production'
 
   deploy-production-trigger:
-    needs: deploy-development
+#    needs: deploy-development
     environment: 'development'
     name: Trigger deploy to production
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
           git pull origin master
           git config --global user.name "rafalry"
           git config --global user.email "rafalry@users.noreply.github.com"
-          git branch -d production
+          git branch -d production || true
           git checkout production origin/production || git checkout -b production origin/production
           git pull origin production
           git merge --ff-only --no-edit master

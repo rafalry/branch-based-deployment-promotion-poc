@@ -1,4 +1,4 @@
-name: Deploy to development
+name: Development deployment
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy-development:
-    name: Deploy to development
+    name: Development deployment
     environment: 'development'
     runs-on: ubuntu-latest
     steps:
@@ -16,7 +16,7 @@ jobs:
   deploy-production-trigger:
 #    needs: deploy-development
     environment: 'development'
-    name: Trigger deploy to production
+    name: Trigger production deployment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -26,18 +26,12 @@ jobs:
           fetch-depth: 0
       - name: Merge master into production branch
         run: |
-          set -x
           git status
-          git --no-pager log --decorate=short --pretty=oneline -n30
-          sleep 1
           git config --global user.name "rafalry"
           git config --global user.email "rafalry@users.noreply.github.com"
-          git branch -D production || true
           git fetch
           git checkout production || git checkout -b production
           git pull origin production
-          git --no-pager log --decorate=short --pretty=oneline -n30
-          sleep 1
           git merge --ff-only --no-edit master
       - name: Push changes to production branch
         run: |

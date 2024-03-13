@@ -1,4 +1,4 @@
-name: Deploy to production
+name: Production deployment
 on:
   push:
     branches:
@@ -6,8 +6,8 @@ on:
 
 jobs:
   deploy-production-trigger:
-    name: Deploy to production
+    name: Production deployment
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to production
-        run: echo 'Deploy to production'
+      - name: Production deployment
+        run: echo 'Production deployment'

@@ -14,8 +14,8 @@ jobs:
         run: echo 'Deploy to production'
 
   deploy-production-trigger:
-#    needs: deploy-development
-    environment: 'development'
+    needs: deploy-development
+    environment: 'production'
     name: Trigger production deployment
     runs-on: ubuntu-latest
     steps:

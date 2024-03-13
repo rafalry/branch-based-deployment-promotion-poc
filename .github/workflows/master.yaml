@@ -29,7 +29,7 @@ jobs:
           git branch -D master-full || true
           git fetch
           git checkout -b master-full origin/master
-          git pull origin master-full
+          git pull origin master
           git --no-pager log --decorate=short --pretty=oneline -n30
           sleep 1
           git config --global user.name "rafalry"

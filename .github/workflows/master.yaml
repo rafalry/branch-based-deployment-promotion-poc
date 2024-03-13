@@ -25,6 +25,8 @@ jobs:
           token: ${{ secrets.TOKEN }}
       - name: Merge master into production branch
         run: |
+          git branch master
+          git pull origin master
           git config --global user.name "rafalry"
           git config --global user.email "rafalry@users.noreply.github.com"
           git branch -d production

@@ -14,8 +14,8 @@ jobs:
         run: echo 'Deploy to production'
 
 
-  deploy-production-check:
-    name: Determine production deployment flow
+  deploy-production-approval-check:
+    name: Check if approval required
     runs-on: ubuntu-latest
     environment: 'development'
     outputs:
@@ -39,8 +39,8 @@ jobs:
           
 
   deploy-production-manual-trigger:
-    if: ${{ needs.deploy-production-check.outputs.with_approval == 'true' }}
-    needs: deploy-production-check
+    if: ${{ needs.deploy-production-approval-check.outputs.with_approval == 'true' }}
+    needs: deploy-production-approval-check
     environment: 'production'
     name: Trigger production deployment
     runs-on: ubuntu-latest
@@ -65,8 +65,8 @@ jobs:
 
 
   deploy-production-auto-trigger:
-    if: ${{ needs.deploy-production-check.outputs.with_approval == 'false' }}
-    needs: deploy-production-check
+    if: ${{ needs.deploy-production-approval-check.outputs.with_approval == 'false' }}
+    needs: deploy-production-approval-check
     environment: 'production-auto '
     name: Trigger production deployment
     runs-on: ubuntu-latest

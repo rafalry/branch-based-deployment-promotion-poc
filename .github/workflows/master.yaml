@@ -30,8 +30,8 @@ jobs:
         id: determine_approval_required
         run: |
           set -x
-          last_commit_message=$(git log -1 --pretty=%B)
-          if [[ $last_commit_message == *"[INFRA]"* ]]; then
+          commits_ahead_of_production=$(git --no-pager log origin/production..master --pretty=format:"%B")
+          if [[ $commits_ahead_of_production == *"[INFRA]"* ]]; then
             echo "approval_required=true" >> "$GITHUB_OUTPUT"
           else
             echo "approval_required=false" >> "$GITHUB_OUTPUT"
@@ -67,7 +67,7 @@ jobs:
   deploy-production-auto-trigger:
     if: ${{ needs.deploy-production-approval-check.outputs.with_approval == 'false' }}
     needs: deploy-production-approval-check
-    environment: 'production-auto '
+    environment: 'production-auto'
     name: Trigger production deployment
     runs-on: ubuntu-latest
     steps:

@@ -42,7 +42,7 @@ jobs:
     if: ${{ needs.deploy-production-approval-check.outputs.with_approval == 'true' }}
     needs: deploy-production-approval-check
     environment: 'production'
-    name: Trigger production deployment
+    name: Approve production deployment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -68,7 +68,7 @@ jobs:
     if: ${{ needs.deploy-production-approval-check.outputs.with_approval == 'false' }}
     needs: deploy-production-approval-check
     environment: 'production-auto'
-    name: Trigger production deployment
+    name: Auto trigger production deployment
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}

@@ -4,9 +4,6 @@ on:
     branches:
       - master
 
-concurrency:
-  group: ${{ github.workflow }}
-
 jobs:
   deploy-development:
     name: Development deployment
@@ -73,6 +70,9 @@ jobs:
     environment: 'production-auto'
     name: Trigger production deployment
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

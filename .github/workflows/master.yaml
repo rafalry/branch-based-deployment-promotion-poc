@@ -16,6 +16,7 @@ jobs:
 
   deploy-production-approval-check:
     name: Check if approval required
+    needs: deploy-development
     runs-on: ubuntu-latest
     environment: 'development'
     outputs:

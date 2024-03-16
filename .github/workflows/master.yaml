@@ -29,12 +29,13 @@ jobs:
       - name: Determine if approval is required for production deployment
         id: determine_approval_required
         run: |
+          set -x
           last_commit_message=$(git log -1 --pretty=%B)
           if [[ $last_commit_message == *"[INFRA]"* ]]; then
             echo "approval_required=true" >> "$GITHUB_OUTPUT"
           else
             echo "approval_required=false" >> "$GITHUB_OUTPUT"
-          done
+          fi
           
 
   deploy-production-manual-trigger:

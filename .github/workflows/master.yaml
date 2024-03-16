@@ -4,6 +4,9 @@ on:
     branches:
       - master
 
+concurrency:
+  group: ${{ github.workflow }}
+
 jobs:
   deploy-development:
     name: Development deployment
